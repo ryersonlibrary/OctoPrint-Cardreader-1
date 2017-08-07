@@ -4,7 +4,7 @@ from __future__ import absolute_import
 import octoprint.plugin
 import evdev
 
-class CardreaderPlugin(octoprint.plugin.StartupPlugin, octoprint.plugin.EventHandlerPlugin):
+class CardreaderPlugin(octoprint.plugin.EventHandlerPlugin):
 	def __init__(self):
 		self.isPrinting = None
 	def on_after_startup(self):
