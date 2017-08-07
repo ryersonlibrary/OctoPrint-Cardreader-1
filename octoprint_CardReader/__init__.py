@@ -4,13 +4,10 @@ from __future__ import absolute_import
 import octoprint.plugin
 import evdev
 
-class CardreaderPlugin(octoprint.plugin.StartupPlugin, octoprint.plugin.EventHandlerPlugin):
+class CardreaderPlugin(octoprint.plugin.EventHandlerPlugin):
 	def __init__(self):
-		self.isPrinting = None
-	def on_after_startup(self):
-		self._logger.info("Hello World!")
 		self.isPrinting = False
-
+	
 	def on_event(self, event, payload):
 		if event == "PrinterStateChanged":
 			if payload['state_id'] == 'PRINTING':
