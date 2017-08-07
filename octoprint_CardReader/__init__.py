@@ -6,8 +6,13 @@ import evdev
 
 class CardreaderPlugin(octoprint.plugin.EventHandlerPlugin):
 	def __init__(self):
+		self.isPrinting = None
+	def on_after_startup(self):
 		self.isPrinting = False
-	
+		devices = [evdev.InputDevice(fn) for fn in evdev.list_devices()]
+		for device in devices:
+			self._logger.info(device.fn + "\t" + device.name + "\t" +  device.phys)
+
 	def on_event(self, event, payload):
 		if event == "PrinterStateChanged":
 			if payload['state_id'] == 'PRINTING':
